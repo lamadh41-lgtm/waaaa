@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>واتساب ويب | WhatsApp Web</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+</head>
+<body>
+  <!-- شاشة الدخول مع QR -->
+  <div id="login-screen" class="login-screen">
+    <div class="login-container">
+      <div class="login-left">
+        <div class="logo-area">
+          <svg class="whatsapp-logo" viewBox="0 0 24 24" width="48" height="48">
+            <path fill="#25D366" d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.435 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+          </svg>
+          <h1>واتساب ويب</h1>
+        </div>
+        <div class="steps">
+          <h2>خطوات الربط</h2>
+          <ol>
+            <li>افتح واتساب على هاتفك</li>
+            <li>اضغط على <strong>الإعدادات</strong> ثم <strong>الأجهزة المرتبطة</strong></li>
+            <li>اضغط على <strong>ربط جهاز</strong></li>
+            <li>وجّه الكاميرا نحو هذه الشاشة لمسح رمز QR</li>
+          </ol>
+        </div>
+        <p class="hint">أو اضغط الزر بالأسفل للمحاكاة</p>
+        <button id="simulate-scan" class="btn-primary">محاكاة المسح والدخول</button>
+      </div>
+      <div class="login-right">
+        <div class="qr-wrapper">
+          <div id="qrcode"></div>
+          <div class="qr-overlay" id="qr-overlay">
+            <div class="spinner"></div>
+            <span>جاري الربط...</span>
+          </div>
+        </div>
+        <p class="qr-caption">امسح رمز QR للدخول</p>
+      </div>
+    </div>
+    <footer class="login-footer">
+      <span>تصميم بسيط واحترافي · غير مرتبط بواتساب الرسمي</span>
+    </footer>
+  </div>
+
+  <!-- واجهة المحادثات -->
+  <div id="app" class="app hidden">
+    <!-- الشريط الجانبي -->
+    <aside class="sidebar">
+      <header class="sidebar-header">
+        <div class="user-avatar" id="my-avatar">أ</div>
+        <div class="header-actions">
+          <button class="icon-btn" title="الحالة" id="btn-status">
+            <svg viewBox="0 0 24 24" width="24" height="24"><path fill="currentColor" d="M12 21.7c.9 0 1.7-.8 1.7-1.7h-3.4c0 .9.8 1.7 1.7 1.7zm5.6-5.2v-4.7c0-2.7-1.8-4.8-4.3-5.4v-.6c0-.8-.7-1.4-1.4-1.4-.8 0-1.4.6-1.4 1.4v.6c-2.5.6-4.3 2.8-4.3 5.4v4.7l-1.7 1.7v.9h14.6v-.9l-1.5-1.7z"/></svg>
+          </button>
+          <button class="icon-btn" title="محادثة جديدة" id="btn-new-chat">
+            <svg viewBox="0 0 24 24" width="24" height="24"><path fill="currentColor" d="M19.005 3.175H4.674C3.642 3.175 3 3.789 3 4.821V21.02l3.544-3.514h12.461c1.033 0 2.064-1.06 2.064-2.093V4.821c-.001-1.032-1.032-1.646-2.064-1.646zm-4.989 9.869H7.041V11.1h6.975v1.944zm3-4H7.041V7.1h9.975v1.944z"/></svg>
+          </button>
+          <button class="icon-btn" title="القائمة" id="btn-menu">
+            <svg viewBox="0 0 24 24" width="24" height="24"><path fill="currentColor" d="M12 7a2 2 0 1 0-.001-4.001A2 2 0 0 0 12 7zm0 2a2 2 0 1 0-.001 4.001A2 2 0 0 0 12 9zm0 6a2 2 0 1 0-.001 4.001A2 2 0 0 0 12 15z"/></svg>
+          </button>
+        </div>
+      </header>
+
+      <div class="search-box">
+        <div class="search-inner">
+          <svg viewBox="0 0 24 24" width="18" height="18"><path fill="currentColor" d="M15.009 13.805h-.945l-.352-.332c1.183-1.397 1.897-3.195 1.897-5.148 0-4.297-3.478-7.775-7.775-7.775S0 3.678 0 7.975s3.478 7.775 7.775 7.775c1.953 0 3.751-.714 5.148-1.897l.332.352v.945L19.881 24l2.121-2.121-6.993-6.993zM7.775 13.5c-3.041 0-5.5-2.459-5.5-5.5s2.459-5.5 5.5-5.5 5.5 2.459 5.5 5.5-2.459 5.5-5.5 5.5z"/></svg>
+          <input type="text" placeholder="ابحث أو ابدأ محادثة جديدة" id="search-input">
+        </div>
+      </div>
+
+      <div class="chat-list" id="chat-list">
+        <!-- المحادثات هتتضاف بالـ JS -->
+      </div>
+    </aside>
+
+    <!-- منطقة المحادثة -->
+    <main class="chat-area" id="chat-area">
+      <div class="empty-state" id="empty-state">
+        <div class="empty-content">
+          <svg viewBox="0 0 303 172" width="220" class="empty-illu">
+            <path fill="#DAF7C9" d="M229.2 160.2c-6.1 4.5-13.3 7.1-21 7.1-19.3 0-35-15.7-35-35s15.7-35 35-35c6.1 0 11.8 1.6 16.8 4.4"/>
+            <path fill="#25D366" d="M229.2 160.2c-6.1 4.5-13.3 7.1-21 7.1-19.3 0-35-15.7-35-35s15.7-35 35-35c6.1 0 11.8 1.6 16.8 4.4"/>
+          </svg>
+          <h2>واتساب ويب</h2>
+          <p>أرسل واستقبل الرسائل بدون ما تبقي هاتفك متصل.<br>استخدم واتساب على ما يصل إلى 4 أجهزة مرتبطة و هاتف واحد في نفس الوقت.</p>
+        </div>
+      </div>
+
+      <div class="active-chat hidden" id="active-chat">
+        <header class="chat-header">
+          <div class="chat-header-info">
+            <div class="chat-avatar" id="active-avatar">?</div>
+            <div class="chat-meta">
+              <h3 id="active-name">الاسم</h3>
+              <span id="active-status">متصل</span>
+            </div>
+          </div>
+          <div class="chat-header-actions">
+            <button class="icon-btn" title="بحث">
+              <svg viewBox="0 0 24 24" width="24" height="24"><path fill="currentColor" d="M15.009 13.805h-.945l-.352-.332c1.183-1.397 1.897-3.195 1.897-5.148 0-4.297-3.478-7.775-7.775-7.775S0 3.678 0 7.975s3.478 7.775 7.775 7.775c1.953 0 3.751-.714 5.148-1.897l.332.352v.945L19.881 24l2.121-2.121-6.993-6.993zM7.775 13.5c-3.041 0-5.5-2.459-5.5-5.5s2.459-5.5 5.5-5.5 5.5 2.459 5.5 5.5-2.459 5.5-5.5 5.5z"/></svg>
+            </button>
+            <button class="icon-btn" title="المزيد">
+              <svg viewBox="0 0 24 24" width="24" height="24"><path fill="currentColor" d="M12 7a2 2 0 1 0-.001-4.001A2 2 0 0 0 12 7zm0 2a2 2 0 1 0-.001 4.001A2 2 0 0 0 12 9zm0 6a2 2 0 1 0-.001 4.001A2 2 0 0 0 12 15z"/></svg>
+            </button>
+          </div>
+        </header>
+
+        <div class="messages" id="messages">
+          <!-- الرسائل -->
+        </div>
+
+        <footer class="chat-footer">
+          <button class="icon-btn" title="إيموجي">
+            <svg viewBox="0 0 24 24" width="24" height="24"><path fill="currentColor" d="M9.153 11.603c.795 0 1.439-.671 1.439-1.5s-.644-1.5-1.439-1.5-1.439.671-1.439 1.5.644 1.5 1.439 1.5zm-3.5 0c.795 0 1.439-.671 1.439-1.5s-.644-1.5-1.439-1.5-1.439.671-1.439 1.5.644 1.5 1.439 1.5zm7 0c.795 0 1.439-.671 1.439-1.5s-.644-1.5-1.439-1.5-1.439.671-1.439 1.5.644 1.5 1.439 1.5zm3.5 0c.795 0 1.439-.671 1.439-1.5s-.644-1.5-1.439-1.5-1.439.671-1.439 1.5.644 1.5 1.439 1.5zM12 21.5c5.25 0 9.5-4.25 9.5-9.5S17.25 2.5 12 2.5 2.5 6.75 2.5 12s4.25 9.5 9.5 9.5zm0-17c4.142 0 7.5 3.358 7.5 7.5s-3.358 7.5-7.5 7.5-7.5-3.358-7.5-7.5 3.358-7.5 7.5-7.5z"/></svg>
+          </button>
+          <button class="icon-btn" title="مرفق">
+            <svg viewBox="0 0 24 24" width="24" height="24"><path fill="currentColor" d="M1.816 15.556v.002c0 1.502.584 2.912 1.646 3.972s2.472 1.647 3.974 1.647a5.57 5.57 0 0 0 3.972-1.645l9.547-9.548c.737-.737 1.145-1.718 1.145-2.725s-.408-1.988-1.144-2.725a3.825 3.825 0 0 0-2.725-1.143 3.825 3.825 0 0 0-2.725 1.143L4.934 13.852a2.276 2.276 0 0 0-.645 1.622 2.28 2.28 0 0 0 .646 1.623 2.28 2.28 0 0 0 1.622.646c.605 0 1.178-.236 1.623-.646l6.824-6.814a.75.75 0 0 1 1.06 1.06l-6.824 6.814a3.78 3.78 0 0 1-2.683 1.11 3.78 3.78 0 0 1-2.683-1.11 3.78 3.78 0 0 1-1.11-2.683c0-1.012.394-1.964 1.11-2.683l10.57-10.57a5.32 5.32 0 0 1 3.783-1.566 5.32 5.32 0 0 1 3.783 1.566 5.32 5.32 0 0 1 1.566 3.783c0 1.43-.557 2.773-1.566 3.783l-9.547 9.548a7.07 7.07 0 0 1-5.023 2.08 7.07 7.07 0 0 1-5.023-2.08 7.07 7.07 0 0 1-2.08-5.023v-.002z"/></svg>
+          </button>
+          <div class="input-wrapper">
+            <input type="text" id="message-input" placeholder="اكتب رسالة" autocomplete="off">
+          </div>
+          <button class="icon-btn send-btn" id="send-btn" title="إرسال">
+            <svg viewBox="0 0 24 24" width="24" height="24"><path fill="currentColor" d="M1.101 21.757L23.8 12.028 1.101 2.3l.011 7.912 13.623 1.816-13.623 1.817-.011 7.912z"/></svg>
+          </button>
+        </footer>
+      </div>
+    </main>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
