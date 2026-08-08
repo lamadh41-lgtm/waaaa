@@ -1,0 +1,56 @@
+@keyframes loadProgress {
+  0% { width: 0%; }
+  70% { width: 85%; }
+  100% { width: 100%; }
+}
+
+@keyframes modalIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95) translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+@keyframes toastIn {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.file-card {
+  animation: slideUp 0.3s ease both;
+}
+
+.file-card:nth-child(1) { animation-delay: 0.02s; }
+.file-card:nth-child(2) { animation-delay: 0.04s; }
+.file-card:nth-child(3) { animation-delay: 0.06s; }
+.file-card:nth-child(4) { animation-delay: 0.08s; }
+.file-card:nth-child(5) { animation-delay: 0.10s; }
+.file-card:nth-child(6) { animation-delay: 0.12s; }
+.file-card:nth-child(7) { animation-delay: 0.14s; }
+.file-card:nth-child(8) { animation-delay: 0.16s; }
